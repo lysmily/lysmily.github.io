@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="python之第一天学习笔记输入和输出输出&amp;gt;&amp;gt;&amp;gt; print(&amp;#39;hello, world&amp;#39;)print()函数也可以接受多个字符串，用逗号“,”隔开，就可以连成一串输出12&amp;gt;&amp;gt;&amp;gt; print(&amp;apos;The quick brown fox&amp;apos;, &amp;apos;jumps over&amp;apos;, &amp;apos;the lazy dog&amp;ap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小圆第一天学习python笔记">
+<meta property="og:url" content="http://yoursite.com/first/index.html">
+<meta property="og:site_name" content="燎原的博客">
+<meta property="og:description" content="python之第一天学习笔记输入和输出输出&amp;gt;&amp;gt;&amp;gt; print(&amp;#39;hello, world&amp;#39;)print()函数也可以接受多个字符串，用逗号“,”隔开，就可以连成一串输出12&amp;gt;&amp;gt;&amp;gt; print(&amp;apos;The quick brown fox&amp;apos;, &amp;apos;jumps over&amp;apos;, &amp;apos;the lazy dog&amp;ap">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-14T07:07:56.157Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小圆第一天学习python笔记">
+<meta name="twitter:description" content="python之第一天学习笔记输入和输出输出&amp;gt;&amp;gt;&amp;gt; print(&amp;#39;hello, world&amp;#39;)print()函数也可以接受多个字符串，用逗号“,”隔开，就可以连成一串输出12&amp;gt;&amp;gt;&amp;gt; print(&amp;apos;The quick brown fox&amp;apos;, &amp;apos;jumps over&amp;apos;, &amp;apos;the lazy dog&amp;ap">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/first/">
+
+
+
+
+
+  <title>小圆第一天学习python笔记 | 燎原的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">燎原的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/first/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="贾燎原">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="燎原的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小圆第一天学习python笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T15:04:32+08:00">
+                2018-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python之第一天学习笔记"><a href="#python之第一天学习笔记" class="headerlink" title="python之第一天学习笔记"></a>python之第一天学习笔记</h1><h2 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h2><h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p><code>&gt;&gt;&gt; print(&#39;hello, world&#39;)</code><br>print()函数也可以接受多个字符串，用逗号“,”隔开，就可以连成一串输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(&apos;The quick brown fox&apos;, &apos;jumps over&apos;, &apos;the lazy dog&apos;)</span><br><span class="line">The quick brown fox jumps over the lazy dog</span><br></pre></td></tr></table></figure></p>
+<p><font color="#00ffff"> print()会一次打印每个字符串,遇到”,”会输出一个空格. </font></p>
+<h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><p>python提供了input(),可以让用户输入字符串,并且存放到一个变量里<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; name = input()</span><br><span class="line">xiaoyuan</span><br></pre></td></tr></table></figure></p>
+<p>input()可以让你显示一个字符串来提示用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name = input(&apos;please enter your name: &apos;)//input返回值为字符串类型</span><br><span class="line">print(&apos;hello,&apos;, name)</span><br></pre></td></tr></table></figure></p>
+<p>打印please enter your name:,然后将输入的内容赋值给name</p>
+<hr>
+<h2 id="数据类型和变量"><a href="#数据类型和变量" class="headerlink" title="数据类型和变量"></a>数据类型和变量</h2><p>python的注释是#,其他每一行都是一个语句,当语句以冒号:结尾时,缩进的语句视为代码块.按照规定,应该始终坚持使用4个空格的缩进(缩进是python的灵魂)</p>
+<h3 id="在python中能够处理-整数-浮点数-字符串-布尔值"><a href="#在python中能够处理-整数-浮点数-字符串-布尔值" class="headerlink" title="在python中能够处理:整数,浮点数,字符串,布尔值"></a>在python中能够处理:整数,浮点数,字符串,布尔值</h3><h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><p>由于计算机使用二进制,所以有时候用十六进制表示比较方便,如0xff00.</p>
+<h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><p>浮点数也就是小数,需要注意的是,对于很大或很小的浮点数，就必须用科学计数法表示,用e来代替10,1.23*10^9就是1.23e9.特别注意,整数和浮点数在计算机内部存储的方式是不同的,整数运算永远是精确的(出发难道也是精确的?是的!),二浮点数运算则可能会有四舍五入的误差.<br>解释一下整数的除法为什么也是精确的:<br>在python中有两种除法/:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 10 / 3</span><br><span class="line">3.3333333333333335</span><br></pre></td></tr></table></figure></p>
+<p>/除法的计算结果是浮点数,即使两个整数恰好整除,结果也是浮点数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 9 / 3</span><br><span class="line">3.0</span><br></pre></td></tr></table></figure></p>
+<p>还有一种除法是地板除,两个整数的除法仍然是整数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 10 // 3</span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
+<p>在python中整数和浮点数没有大小限制(浮点数超出一定范围就直接表示为inf(无限大))</p>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>字符串是以单引号’或双引号”括起来的任意文本,如’abc’,”xyz”等,如果’本身也是一个字符,那就可以用””括起来,比如”I’m ok”,如果字符串内部既包含’又包含”怎么办?可以用转义字符\来表示,比如:’i\’m \”ok\”!’表示i’m “ok”其他的看如下示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(&apos;I\&apos;m ok.&apos;)</span><br><span class="line">I&apos;m ok.</span><br><span class="line">&gt;&gt;&gt; print(&apos;I\&apos;m learning\nPython.&apos;)</span><br><span class="line">I&apos;m learning</span><br><span class="line">Python.</span><br><span class="line">&gt;&gt;&gt; print(&apos;\\\n\\&apos;)</span><br><span class="line">\</span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
+<p>如果字符串里面有很多字符都需要转义，就需要加很多\，为了简化，Python还允许用r’’表示’’内部的字符串默认不转义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(&apos;\\\t\\&apos;)</span><br><span class="line">\       \</span><br><span class="line">&gt;&gt;&gt; print(r&apos;\\\t\\&apos;)</span><br><span class="line">\\\t\\</span><br></pre></td></tr></table></figure></p>
+<p>如果字符串内部有很多换行，用\n写在一行里不好阅读，为了简化，Python允许用’’’…’’’的格式表示多行内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(&apos;&apos;&apos;line1</span><br><span class="line">... line2</span><br><span class="line">... line3&apos;&apos;&apos;)</span><br><span class="line">line1</span><br><span class="line">line2</span><br><span class="line">line3</span><br></pre></td></tr></table></figure></p>
+<h4 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h4><p>一个布尔值只有True,False两种<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 3 &gt; 2</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; 3 &gt; 5</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+<p>布尔值可以用and,or,not运算<br>空值:None,这个None不能理解为0,因为0是有意义的,而None就是一个特殊的空值<br>python的不安两本十类型不固定,称之为动态语言,与之相对的静态语言就是必须指定变量类型<br>常量:常量就是不能变的量,在python中通常用全部大写的变量名表示常量:<br>PI = 3.14159265359</p>
+<h2 id="python中的字符串"><a href="#python中的字符串" class="headerlink" title="python中的字符串"></a>python中的字符串</h2><p>在python3中字符串是以Unicode编码的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(&apos;包含中文的str&apos;)</span><br><span class="line">包含中文的str</span><br></pre></td></tr></table></figure></p>
+<p>ord()函数获取字符的整数表示,chr()函数把编码转化为对应的字符:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; ord(&apos;A&apos;)</span><br><span class="line">65</span><br><span class="line">&gt;&gt;&gt; ord(&apos;中&apos;)</span><br><span class="line">20013</span><br><span class="line">&gt;&gt;&gt; chr(66)</span><br><span class="line">&apos;B&apos;</span><br><span class="line">&gt;&gt;&gt; chr(25991)</span><br><span class="line">&apos;文&apos;</span><br></pre></td></tr></table></figure></p>
+<p>由于python的字符串类型是str,如果在网络上传输,或者保存到磁盘上就需要把str变为以字节为单位的bytes.<br>Python对bytes类型的数据用带b前缀的单引号或双引号表示：x = b’ABC’</p>
+<p><font color="#00ffff"> 注意’ABC’和b’ABC’不同,虽然后者内容显示和前者一样,但bytes的每个字符都之战一个字节 </font><br>以Unicode表示的str通过encode()方法可以编码为制定的bytes:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;ABC&apos;.encode(&apos;ascii&apos;)</span><br><span class="line">b&apos;ABC&apos;</span><br><span class="line">&gt;&gt;&gt; &apos;中文&apos;.encode(&apos;utf-8&apos;)</span><br><span class="line">b&apos;\xe4\xb8\xad\xe6\x96\x87&apos;</span><br><span class="line">&gt;&gt;&gt; &apos;中文&apos;.encode(&apos;ascii&apos;)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">UnicodeEncodeError: &apos;ascii&apos; codec can&apos;t encode characters in position 0-1: ordinal not in range(128)</span><br></pre></td></tr></table></figure></p>
+<p>有中文的str不能用ASCII编码,因为超出了编码范围.因此报错,在bytes中无法显示为ASCII的字节用\x##显示<br>反之,我们想要把bytes变为str需要decode():<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; b&apos;ABC&apos;.decode(&apos;ascii&apos;)</span><br><span class="line">&apos;ABC&apos;</span><br><span class="line">&gt;&gt;&gt; b&apos;\xe4\xb8\xad\xe6\x96\x87&apos;.decode(&apos;utf-8&apos;)</span><br><span class="line">&apos;中文&apos;</span><br></pre></td></tr></table></figure></p>
+<p>如果bytes中包含无法解码的字节,decode()方法会报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; b&apos;\xe4\xb8\xad\xff&apos;.decode(&apos;utf-8&apos;)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">UnicodeDecodeError: &apos;utf-8&apos; codec can&apos;t decode byte 0xff in position 3: invalid start byte</span><br></pre></td></tr></table></figure></p>
+<p>但如果只有一小部分无效的字节,我们可以通过errors=’ignore’忽略错误的字节<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; b&apos;\xe4\xb8\xad\xff&apos;.decode(&apos;utf-8&apos;, errors=&apos;ignore&apos;)</span><br><span class="line">&apos;中&apos;</span><br></pre></td></tr></table></figure></p>
+<p>len()函数可以计算str中含有多少个字符:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; len(&apos;ABC&apos;)</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; len(&apos;中文&apos;)</span><br><span class="line">2</span><br></pre></td></tr></table></figure></p>
+<h3 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h3><p>在python中,采用的格式化方式和C语言是一致的,用%实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;Hello, %s&apos; % &apos;world&apos;</span><br><span class="line">&apos;Hello, world&apos;</span><br><span class="line">&gt;&gt;&gt; &apos;Hi, %s, you have $%d.&apos; % (&apos;Michael&apos;, 1000000)</span><br><span class="line">&apos;Hi, Michael, you have $1000000.&apos;</span><br></pre></td></tr></table></figure></p>
+<p><font color="#00ffff"> 注意:如果字符串里%是一个普通字符? 我们可以用%%来表示一个%: </font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;growth rate: %d %%&apos; % 7</span><br><span class="line">&apos;growth rate: 7 %&apos;</span><br></pre></td></tr></table></figure></p>
+<p>还有一种格式化方式:使用字符串format()方法,个人感觉比较麻烦,用到的话再说吧…</p>
+<hr>
+<p>今天就先到这里吧,感觉还有好多没学,声明一下,这些笔记是依据廖雪峰老师的教程写的,所以看过之后有什么不明白的可以去看一下廖雪峰老师的教程^_^</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/test1/" rel="next" title="test">
+                <i class="fa fa-chevron-left"></i> test
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/second/" rel="prev" title="小圆第二天的学习">
+                小圆第二天的学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">贾燎原</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python之第一天学习笔记"><span class="nav-number">1.</span> <span class="nav-text">python之第一天学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#输入和输出"><span class="nav-number">1.1.</span> <span class="nav-text">输入和输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输出"><span class="nav-number">1.1.1.</span> <span class="nav-text">输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入"><span class="nav-number">1.1.2.</span> <span class="nav-text">输入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型和变量"><span class="nav-number">1.2.</span> <span class="nav-text">数据类型和变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在python中能够处理-整数-浮点数-字符串-布尔值"><span class="nav-number">1.2.1.</span> <span class="nav-text">在python中能够处理:整数,浮点数,字符串,布尔值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浮点数"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">浮点数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔值"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">布尔值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python中的字符串"><span class="nav-number">1.3.</span> <span class="nav-text">python中的字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化输出"><span class="nav-number">1.3.1.</span> <span class="nav-text">格式化输出</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">贾燎原</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
