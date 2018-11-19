@@ -229,6 +229,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sixth/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="贾燎原">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="燎原的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/sixth/" itemprop="url">小圆第六天学习python笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-19T17:43:38+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h1><p>函数式编程就是一种抽象程度很高的编程范式，纯粹的函数式编程语言编写的函数没有变量，因此，任意一个函数，只要输入是确定的，输出就是确定的，这种纯函数我们称之为没有副作用。而允许使用变量的程序设计语言，由于函数内部的变量状态不确定，同样的输入，可能得到不同的输出，因此，这种函数是有副作用的.<br>函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数！</p>
+<p>Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。</p>
+<hr>
+<p>小结一下:<br>面向对象：一个有诸多技能的工人，可以让这个工人去干很多事情</p>
+<p>函数式编程：一群只有单个技能的工人，可以让他们同时出动去干一件复杂的事情</p>
+<p>高阶函数：一个工人必须依靠下一个工人的技能才能完成工作</p>
+<h2 id="返回函数"><a href="#返回函数" class="headerlink" title="返回函数"></a>返回函数</h2><p>告诫函数除了可以接受函数作为参数外,还可以将函数作为结果返回.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def lazy_sum(*args):</span><br><span class="line">    def sum():</span><br><span class="line">        ax = 0</span><br><span class="line">        for n in args:</span><br><span class="line">            ax = ax + n</span><br><span class="line">        return ax</span><br><span class="line">    return sum</span><br></pre></td></tr></table></figure></p>
+<p>当我们调用lazy_sum()时返回的并不是结果,而是一个函数,当我们不需要立即求和,而是根据需要再来计算,就可以使用这种方法.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = lazy_sum(1, 3, 5, 7, 9)</span><br><span class="line">&gt;&gt;&gt; f</span><br><span class="line">&lt;function lazy_sum.&lt;locals&gt;.sum at 0x101c6ed90&gt;</span><br><span class="line">&gt;&gt;&gt; f()</span><br><span class="line">25</span><br></pre></td></tr></table></figure></p>
+<p>在这个例子中,外部函数定义了内部函数sum,当外部函数返回sum时,相关参数和变量都保存在返回的函数中,这种结构我们称为闭包.请注意当我们调用lazy_sum()时,每次都会返回一个新的函数,即使传入一个新的函数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f1 = lazy_sum(1, 3, 5, 7, 9)</span><br><span class="line">&gt;&gt;&gt; f2 = lazy_sum(1, 3, 5, 7, 9)</span><br><span class="line">&gt;&gt;&gt; f1==f2</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>我们还需要注意另一个问题,返回的函数没有立刻执行,而是直到调用f()才执行.栗子如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def count():</span><br><span class="line">    fs = []</span><br><span class="line">    for i in range(1, 4):</span><br><span class="line">        def f():</span><br><span class="line">             return i*i</span><br><span class="line">        fs.append(f)</span><br><span class="line">    return fs</span><br><span class="line"></span><br><span class="line">f1, f2, f3 = count()</span><br></pre></td></tr></table></figure></p>
+<p>#你可能认为调用f1(),f2(),f3()的结果应该是1,4,9,那么实际上呢?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f1()</span><br><span class="line">9</span><br><span class="line">&gt;&gt;&gt; f2()</span><br><span class="line">9</span><br><span class="line">&gt;&gt;&gt; f3()</span><br><span class="line">9</span><br></pre></td></tr></table></figure></p>
+<p>全部都是9!因为返回的函数使用了变量i,但上边也说过返回的函数不是立刻执行,等到3个函数都返回时,它所引用的i已经变为3,所以最后都是9.<br><code>返回闭包时牢记一点：返回函数不要引用任何循环变量，或者后续会发生变化的变量。</code></p>
+<p>如果一定要引用循环怎么办?不怕,我们可以在创建一个函数,让这个函数的参数来绑定循环变量,无论循环变量怎么改,绑定到函数参数的值不变:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def count():</span><br><span class="line">    def f(j):</span><br><span class="line">        def g():</span><br><span class="line">            return j*j</span><br><span class="line">        return g</span><br><span class="line">    fs = []</span><br><span class="line">    for i in range(1, 4):</span><br><span class="line">        fs.append(f(i)) # f(i)立刻被执行，因此i的当前值被传入f()</span><br><span class="line">    return fs</span><br></pre></td></tr></table></figure></p>
+<p>——–让我们再看看其他关于闭包的解释——-<br>一般情况下，在我们认知当中，如果一个函数结束，函数的内部所有东西都会释放掉，还给内存，局部变量都会消失。但是闭包是一种特殊情况，如果外函数在结束的时候发现有自己的临时变量将来会在内部函数中用到，就把这个临时变量绑定给了内部函数，然后自己再结束.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#闭包函数的实例</span><br><span class="line"># outer是外部函数 a和b都是外函数的临时变量</span><br><span class="line">def outer( a ):</span><br><span class="line">    b = 10</span><br><span class="line">    # inner是内函数</span><br><span class="line">    def inner():</span><br><span class="line">        #在内函数中 用到了外函数的临时变量</span><br><span class="line">        print(a+b)</span><br><span class="line">    # 外函数的返回值是内函数的引用</span><br><span class="line">    return inner</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    # 在这里我们调用外函数传入参数5</span><br><span class="line">    #此时外函数两个临时变量 a是5 b是10 ，并创建了内函数，然后把内函数的引用返回存给了demo</span><br><span class="line">    # 外函数结束的时候发现内部函数将会用到自己的临时变量，这两个临时变量就不会释放，会绑定给这个内部函数</span><br><span class="line">    demo = outer(5)</span><br><span class="line">    # 我们调用内部函数，看一看内部函数是不是能使用外部函数的临时变量</span><br><span class="line">    # demo存了外函数的返回值，也就是inner函数的引用，这里相当于执行inner函数</span><br><span class="line">    demo() # 15</span><br><span class="line"></span><br><span class="line">    demo2 = outer(7)</span><br><span class="line">    demo2()#17</span><br></pre></td></tr></table></figure></p>
+<p>在基本的python语法中,一个函数可以随意读取全局数据,但是要修改的时候有两种方法:<font color="red">:1 global 声明全局变量 2 全局变量是可变类型数据的时候可以修改.</font>:<br>1 在python3中，可以用nonlocal 关键字声明 一个变量， 表示这个变量不是局部变量空间的变量，需要向上一层变量空间找这个变量。</p>
+<p>　　　　2 在python2中，没有nonlocal这个关键字，我们可以把闭包变量改成可变类型数据进行修改，比如列表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#修改闭包变量的实例</span><br><span class="line"># outer是外部函数 a和b都是外函数的临时变量</span><br><span class="line">def outer( a ):</span><br><span class="line">    b = 10  # a和b都是闭包变量</span><br><span class="line">    c = [a] #这里对应修改闭包变量的方法2</span><br><span class="line">    # inner是内函数</span><br><span class="line">    def inner():</span><br><span class="line">        #内函数中想修改闭包变量</span><br><span class="line">        # 方法1 nonlocal关键字声明,也可以使用global方法,内层和外层都要声明</span><br><span class="line">        nonlocal  b</span><br><span class="line">        b+=1</span><br><span class="line">        # 方法二，把闭包变量修改成可变数据类型 比如列表</span><br><span class="line">        c[0] += 1</span><br><span class="line">        print(c[0])</span><br><span class="line">        print(b)</span><br><span class="line">    # 外函数的返回值是内函数的引用</span><br><span class="line">    return inner</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line"></span><br><span class="line">    demo = outer(5)</span><br><span class="line">    demo() # 6  11</span><br></pre></td></tr></table></figure></p>
+<p>还有一点要注意:使用闭包的过程中,一旦外函数被调用了一次返回了内函数的引用,虽然每次调用内函数,是开启一个函数执行过后消亡,但是闭包变量实际只有一份,每次开启内函数都是在使用同一份闭包变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#coding:utf8</span><br><span class="line">def outer(x):</span><br><span class="line">    def inner(y):</span><br><span class="line">        nonlocal x</span><br><span class="line">        x+=y</span><br><span class="line">        return x</span><br><span class="line">    return inner</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = outer(10)</span><br><span class="line">print(a(1)) #11</span><br><span class="line">print(a(3)) #14</span><br></pre></td></tr></table></figure></p>
+<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><p>之前没有看这章教程的时候就百度过匿名函数的用法,这次终于找到机会把它补全:</p>
+<p>匿名函数存在的意义:当我们在传入函数时，有些时候，不需要显式地定义函数，直接传入匿名函数更方便<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9]))</span><br><span class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81]</span><br><span class="line">----lambda x: x*x相当于----</span><br><span class="line">def f(x):</span><br><span class="line">    return x * x</span><br></pre></td></tr></table></figure></p>
+<p>关键字<font color="red">lambda</font>表示匿名函数,冒号前面的x表示函数参数.</p>
+<p>匿名函数有一定的限制,就是只能有一个表达式,返回值就是表达式的结果.但也有优点:不必担心函数名冲突,匿名函数是一个变量,也可以赋值给另一个变量,再利用该变量调用函数.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = lambda x: x * x</span><br><span class="line">&gt;&gt;&gt; f</span><br><span class="line">&lt;function &lt;lambda&gt; at 0x101c6ef28&gt;</span><br><span class="line">&gt;&gt;&gt; f(5)</span><br><span class="line">25</span><br></pre></td></tr></table></figure></p>
+<h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3><p>函数对象有一个<strong>name</strong>属性,可以拿到函数的名字:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def now():</span><br><span class="line">...     print(&apos;2018-11-19&apos;)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; f = now</span><br><span class="line">&gt;&gt;&gt; f()</span><br><span class="line">2015-3-25</span><br><span class="line">&gt;&gt;&gt; now.__name__</span><br><span class="line">&apos;now&apos;</span><br><span class="line">&gt;&gt;&gt; f.__name__</span><br><span class="line">&apos;now&apos;</span><br></pre></td></tr></table></figure></p>
+<p>现在,我们想让now()函数不仅仅打印现在的时间,而是想加一点功能,但是又不希望改变now()函数的定义,在这种代码运行期间动态增加功能的方式我们称为<font color="red">装饰器</font>.</p>
+<p>本质上,decorator是一个<font color="red">返回函数</font>的高阶函数,我们可以如下定义:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def log(func):</span><br><span class="line">    def wrapper(*args, **kw):</span><br><span class="line">        print(&apos;call %s():&apos; % func.__name__)</span><br><span class="line">        return func(*args, **kw)</span><br><span class="line">    return wrapper</span><br><span class="line">@log</span><br><span class="line">def now():</span><br><span class="line">    print(&apos;2018-11-19&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>上面的log函数接受一个函数做参数,返回一个函数.然后通过@语法,把decorator置于函数的定义处,让我们来看结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; now()</span><br><span class="line">call now():</span><br><span class="line">2018-11-19</span><br></pre></td></tr></table></figure></p>
+<p>把<font color="red">@log</font>放到<font color="red">now()</font>函数的定义处相当于执行了语句:<code>now = log(now)</code>由于log()是一个decorator,返回一个函数,所以原来的<font color="red">now()</font>仍然存在,只是现在同名的now()指向了新的函数,条用新函数,即在<font color="red">log()</font>函数中返回的wrapper()函数.</p>
+<p><font color="red">wrapper()</font>函数的参数定义是<font color="red">(*args,**kw)</font>,因此,<font color="red">wrapper()</font>函数可以接受任意参数的调用.</p>
+<p>如果decorator本身要传入参数,那么我们需要写一个返回decorator的高阶函数.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def log(text):</span><br><span class="line">    def decorator(func):</span><br><span class="line">        def wrapper(*args, **kw):</span><br><span class="line">            print(&apos;%s %s():&apos; % (text, func.__name__))</span><br><span class="line">            return func(*args, **kw)</span><br><span class="line">        return wrapper</span><br><span class="line">    return decorator</span><br><span class="line">@log(&apos;execute&apos;)</span><br><span class="line">def now():</span><br><span class="line">    print(&apos;2018-11-19&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>执行结果如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; now()</span><br><span class="line">execute now():</span><br><span class="line">2018-11-19</span><br></pre></td></tr></table></figure></p>
+<p>和两套嵌套相比,三层嵌套本质是这样<code>&gt;&gt;&gt; now = log(&#39;execute&#39;)(now)</code></p>
+<p>以上两种decorator的定义都没有问题，但还差最后一步.使用<strong>name</strong>来查看now函数的名称发现它不再是now,而是变成了wrapper:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; now.__name__</span><br><span class="line">&apos;wrapper&apos;</span><br></pre></td></tr></table></figure></p>
+<p>因为返回的那个<font color="red">wrapper()</font>函数的名字就是<font color="red">‘wrapper’</font>,所以我们需要把原始的<strong>name</strong>等属性赋值到<font color="red">wrapper</font>函数中:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import functools</span><br><span class="line"></span><br><span class="line">def log(func):</span><br><span class="line">    @functools.wraps(func)</span><br><span class="line">    def wrapper(*args, **kw):</span><br><span class="line">        print(&apos;call %s():&apos; % func.__name__)</span><br><span class="line">        return func(*args, **kw)</span><br><span class="line">    return wrapper</span><br></pre></td></tr></table></figure></p>
+<p>这样now().<strong>name</strong>就变成now了,置于import functools是导入模块,以后再讲,现在就是在<font color="red">wrapper()</font>函数上加入<font color="red">@functools.wraps(func)</font>就可以了.</p>
+<p>—接下来做一个小练习—</p>
+<p>请设计一个decorator，它可作用于任何函数上，并打印该函数的执行时间：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import time, functools</span><br><span class="line">def metric(fn):</span><br><span class="line">    @functools.wraps(fn)</span><br><span class="line">    def costtime(*args,**kw):</span><br><span class="line">        start=time.time()</span><br><span class="line">        s=fn(*args,**kw)</span><br><span class="line">        end = time.time()</span><br><span class="line">        print(&apos;%s executed in %s ms&apos; % (fn.__name__, end-start))</span><br><span class="line">        return s</span><br><span class="line">    return costtime</span><br><span class="line"># 测试</span><br><span class="line">@metric</span><br><span class="line">def fast(x, y):</span><br><span class="line">    time.sleep(0.0012)</span><br><span class="line">    return x + y;</span><br></pre></td></tr></table></figure></p>
+<h3 id="偏函数"><a href="#偏函数" class="headerlink" title="偏函数"></a>偏函数</h3><p>Python的functools模块提供很多有用的功能,其中一个就是偏函数,在介绍函数参数的时候我们讲到,通过设定函数的默认值可以降低调用的难度,巧了,偏函数也可以.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; int(&apos;12345&apos;)</span><br><span class="line">12345 #默认把字符串转化为整数(10进制)</span><br></pre></td></tr></table></figure></p>
+<p><font color="red">int()</font>函数还提供额外的base参数,默认值为10.传入其它的可以做N进制转换:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; int(&apos;12345&apos;, base=8)</span><br><span class="line">5349</span><br><span class="line">&gt;&gt;&gt; int(&apos;12345&apos;, 16)</span><br><span class="line">74565</span><br></pre></td></tr></table></figure></p>
+<p>当我们有大量的二进制字符串需要转换,每次写int(x,base=2)你乐意吗?我肯定不这么写,所以我们之前可以想到定义一个函数,把默认<font color="red">base=2</font>传进去:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def int2(x,base=2):</span><br><span class="line">    return int(x,base)</span><br><span class="line">&gt;&gt;&gt; int2(&apos;1000000&apos;)</span><br><span class="line">64</span><br></pre></td></tr></table></figure></p>
+<p>这样是不是简单多啦!functools就是帮助我们创建一个偏函数,不需要我们自己定义int2():<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import functools</span><br><span class="line">&gt;&gt;&gt; int2 = functools.partial(int, base=2)</span><br><span class="line">&gt;&gt;&gt; int2(&apos;1000000&apos;)</span><br><span class="line">64</span><br><span class="line">&gt;&gt;&gt; int2(&apos;1010101&apos;)</span><br><span class="line">85</span><br></pre></td></tr></table></figure></p>
+<p>所以简答总结,偏函数的作用就是让函数的某些参数固定住,返回一个新函数.</p>
+<p>最后,创建一个偏函数的时候可以接受函数对象,*args,**kw这三个参数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int2 = functools.partial(int, base=2)</span><br><span class="line">#实际上固定int()函数的base相当于</span><br><span class="line">kw=&#123;&apos;base&apos;:2&#125;</span><br><span class="line">int(&apos;10010&apos;,**kw)</span><br></pre></td></tr></table></figure></p>
+<p>当传入:<code>max2 = functools.partial(max, 10)</code><br>实际上会把10作为*args的一部分自动加到左边,也就是:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">max2(5, 6, 7)</span><br><span class="line">#相当于</span><br><span class="line">args = (10, 5, 6, 7)</span><br><span class="line">max(*args)</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/fifth/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1278,7 +1439,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
