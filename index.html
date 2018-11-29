@@ -229,6 +229,176 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/twelveth/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="贾燎原">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="燎原的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/twelveth/" itemprop="url">小圆第十二天学习python笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-29T17:49:51+08:00">
+                2018-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p>字符串是编程时,用到最多的数据结构,当我们判断一个数据是否是合法的Email地址时,虽然我们可以编程提前<font color="red"><code>@</code></font>前后的子串,然后判断是否是单词和域名,这样做非常麻烦,并且代码不能复用,因此正则表达式就出现了.  </p>
+<p>我们判断一个字符串是否是合法的Email的方法是:</p>
+<ol>
+<li>创建一个匹配Email的正则表达式</li>
+<li>用该正则表达式去匹配用户的输入来判断是否合法.</li>
+</ol>
+<p>在正则表达式中如果直接给出字符就是精确匹配,用<font color="red"><code>\d</code></font>可以匹配一个数字,<font color="red"><code>\w</code></font>可以匹配一个字母或数字,<font color="red"><code>.</code></font>可以匹配任意字符,<font color="red"><code>*</code></font>表示任意个字符,<font color="red"><code>+</code></font>表示至少一个字符,<font color="red"><code>?</code></font>表示0个或者1个字符,<font color="red"><code>{n}</code></font>表示n个字符,<font color="red"><code>{n,m}</code></font>表示n-m个字符.让我们看一个栗子:<font color="red"><code>\d{3}\s+\d{3,8}</code></font>.</p>
+<p>我们来解读一下:</p>
+<ol>
+<li><font color="red"><code>\d{3}</code></font>表示匹配3个数字,例如010</li>
+<li><font color="red"><code>\s</code></font>可以匹配一个空格(也包括Tab等空白符),所以<font color="red"><code>\s+</code></font>表示至少有一个空格.</li>
+<li><font color="red"><code>\d{3,8}</code></font>表示3-8个数字,例如<font color="red"><code>123456</code></font>.</li>
+</ol>
+<p>综合起来上面的正则表达式可以匹配任意一个空格隔开的带区号的电话号码.</p>
+<p>如果是<font color="red"><code>010-123456</code></font>呢?我们这么写<font color="red"><code>\d{3}\-\d{3,8}</code></font>,但是仍然无法匹配<font color="red"><code>010 - 123456</code></font>这样带有空格的.所以还要改进.</p>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><p>为了更精确的匹配,我们可以使用<font color="red"><code>[]</code></font>来表示范围,比如:</p>
+<ul>
+<li><font color="red"><code>[0-9a-zA-Z\_]</code></font>可以匹配一个数字,字母,下划线.</li>
+<li><font color="red"><code>[0-9a-zA-Z\_]+</code></font>可以匹配至少一个由字母,数字,下划线组成的字符串如:’a456’,’5_a’</li>
+<li><font color="red"><code>[a-zA-Z\_][0-9a-zA-Z\_]*</code></font>可以匹配由字母数字下划线开头,后接任意个字母,数字,下划线组成的字符串.</li>
+<li><font color="red"><code>[a-zA-Z\_][0-9a-zA-Z\_]{0, 19}</code></font>可以匹配由字母数字下划线开头,后接有限个(最多19)字母,数字,下划线组成的字符串.</li>
+</ul>
+<p><font color="red"><code>A|B</code></font>可以匹配A或B,例如:<font color="red"><code>(P|p)</code></font>,可以匹配’Python’和’python’</p>
+<p><font color="red"><code>^</code></font>^表示行的开头，<font color="red"><code>^\d</code></font>表示必须以数字开头。<font color="red"><code>$</code></font>表示行的结束，<font color="red"><code>\d$</code></font>表示必须以数字结束。</p>
+<h1 id="re模块"><a href="#re模块" class="headerlink" title="re模块"></a>re模块</h1><p>Python提供<font color="red"><code>re</code></font>模块,包含所以正则表达式的功能,由于python的字符串本身也用<font color="red"><code>\</code></font>转义,因此强烈建议使用Python的前缀<font color="red"><code>r</code></font>,就不用考虑转义的问题了:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = r&apos;ABC\\-001&apos;</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&gt;&gt;&gt; &apos;ABC\\\\-001&apos;</span><br></pre></td></tr></table></figure></p>
+<p>那就让我们试试re模块如何使用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import re</span><br><span class="line">&gt;&gt;&gt; re.match(r&apos;^\d&#123;3&#125;\-\d&#123;3,8&#125;$&apos;, &apos;010-12345&apos;)</span><br><span class="line">&lt;_sre.SRE_Match object; span=(0, 9), match=&apos;010-12345&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; re.match(r&apos;^\d&#123;3&#125;\-\d&#123;3,8&#125;$&apos;, &apos;010 12345&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>也就是说<font color="red"><code>match()</code></font>方法判断如果成功就返回一个March对象,如果失败就返回None.</p>
+<h2 id="节分字符串"><a href="#节分字符串" class="headerlink" title="节分字符串"></a>节分字符串</h2><p>这次我们终于说到<font color="red"><code>split</code></font>函数,让我们看看正常的切分代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;a b   c&apos;.split(&apos; &apos;)</span><br><span class="line">[&apos;a&apos;, &apos;b&apos;, &apos;&apos;, &apos;&apos;, &apos;c&apos;</span><br></pre></td></tr></table></figure></p>
+<p>上面不能识别连续的空格,那我们加上正则表达式试试看:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; re.split(r&apos;\s+&apos;, &apos;a b   c&apos;)</span><br><span class="line">[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]</span><br><span class="line"># 再试试加上逗号</span><br><span class="line">&gt;&gt;&gt; re.split(r&apos;[\s\,]+&apos;, &apos;a,b, c  d&apos;)</span><br><span class="line">[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;]</span><br></pre></td></tr></table></figure></p>
+<h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><p>除了简单的匹配之外,正则表达式还提供了提取子串的功能,用<font color="red"><code>()</code></font>表示的就是要提取的分组.比如:<code>^(\d{3})-(\d{3,8})$</code>分别定义了两个分组,可以直接从匹配的字符里面提取区号和本地号码.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; m = re.match(r&apos;^(\d&#123;3&#125;)-(\d&#123;3,8&#125;)$&apos;, &apos;010-12345&apos;)</span><br><span class="line">&gt;&gt;&gt; m</span><br><span class="line">&lt;_sre.SRE_Match object; span=(0, 9), match=&apos;010-12345&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; m.group(0)</span><br><span class="line">&apos;010-12345&apos;</span><br><span class="line">&gt;&gt;&gt; m.group(1)</span><br><span class="line">&apos;010&apos;</span><br><span class="line">&gt;&gt;&gt; m.group(2)</span><br><span class="line">&apos;12345&apos;</span><br></pre></td></tr></table></figure></p>
+<p>注意上面的<font color="red"><code>group(0)</code></font>永远是原始字符,<font color="red"><code>group(1)</code></font>,<font color="red"><code>group(2)</code></font>…表示第1,2…个子串.让我们看一个凶残的栗子:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t = &apos;19:05:30&apos;</span><br><span class="line">&gt;&gt;&gt; m = re.match(r&apos;^(0[0-9]|1[0-9]|2[0-3]|[0-9])\:(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|[0-9])\:(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|[0-9])$&apos;, t)</span><br><span class="line">&gt;&gt;&gt; m.groups()</span><br><span class="line">(&apos;19&apos;, &apos;05&apos;, &apos;30&apos;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h2><p>最后需要了解的是正则匹配默认是贪婪匹配,也就是匹配尽可能多的字符.看看下面你就明白了:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; re.match(r&apos;^(\d+)(0*)$&apos;, &apos;102300&apos;).groups()</span><br><span class="line">(&apos;102300&apos;, &apos;&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>由于采用贪婪模式,<font color="red"><code>\d+</code></font>直接把后面的0全部匹配了,后面的<font color="red"><code>0*</code></font>只能匹配空字符串.如果我们想采用非贪婪模式,加上<font color="red"><code>?</code></font>就可以了.我们看看结果是啥<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; re.match(r&apos;^(\d+?)(0*)$&apos;, &apos;102300&apos;).groups()</span><br><span class="line">(&apos;1023&apos;, &apos;00&apos;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>当我们在Python中使用正则表达式时，re模块内部会干两件事情：</p>
+<ol>
+<li>编译正则表达式，如果正则表达式的字符串本身不合法，会报错；</li>
+<li>用编译后的正则表达式去匹配字符串。</li>
+</ol>
+<p>如果一个正则表达式要使用很多次,我们可以考虑把它预编译,这样重复使用的时候就不用编译这个步骤了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import re</span><br><span class="line"># 编译:</span><br><span class="line">&gt;&gt;&gt; re_telephone = re.compile(r&apos;^(\d&#123;3&#125;)-(\d&#123;3,8&#125;)$&apos;)</span><br><span class="line"># 使用：</span><br><span class="line">&gt;&gt;&gt; re_telephone.match(&apos;010-12345&apos;).groups()</span><br><span class="line">(&apos;010&apos;, &apos;12345&apos;)</span><br><span class="line">&gt;&gt;&gt; re_telephone.match(&apos;010-8086&apos;).groups()</span><br><span class="line">(&apos;010&apos;, &apos;8086&apos;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="两个小练习"><a href="#两个小练习" class="headerlink" title="两个小练习"></a>两个小练习</h2><p>请尝试写一个验证Email地址的正则表达式。版本一应该可以验证出类似的Email：</p>
+<ul>
+<li><a href="mailto:someone@gmail.com" target="_blank" rel="noopener">someone@gmail.com</a></li>
+<li><a href="mailto:bill.gates@microsoft.com" target="_blank" rel="noopener">bill.gates@microsoft.com</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line">def is_valid_email(addr):</span><br><span class="line">    if re.match(r&apos;^[a-zA-Z.]&#123;2,15&#125;@[a-zA-Z]&#123;2,10&#125;.com$&apos;,addr):</span><br><span class="line">        return True</span><br><span class="line">    else:</span><br><span class="line">        return False</span><br><span class="line"># 测试:</span><br><span class="line">assert is_valid_email(&apos;someone@gmail.com&apos;)</span><br><span class="line">assert is_valid_email(&apos;bill.gates@microsoft.com&apos;)</span><br><span class="line">assert not is_valid_email(&apos;bob#example.com&apos;)</span><br><span class="line">assert not is_valid_email(&apos;mr-bob@example.com&apos;)</span><br><span class="line">print(&apos;ok&apos;)</span><br></pre></td></tr></table></figure>
+<p>版本二可以提取出带名字的Email地址：</p>
+<ul>
+<li><tom paris=""> <a href="mailto:tom@voyager.org" target="_blank" rel="noopener">tom@voyager.org</a> =&gt; Tom Paris</tom></li>
+<li><a href="mailto:bob@example.com" target="_blank" rel="noopener">bob@example.com</a> =&gt; bob</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line">def name_of_email(addr):</span><br><span class="line">    r = re.match(r&apos;^&lt;?([a-zA-Z]+\s?[a-zA-Z]+)&gt;?\s?[a-zA-Z]*@[a-zA-Z0-9]+.[a-zA-Z]+$&apos;, addr);</span><br><span class="line">    return r.group(1)</span><br><span class="line"># 测试:</span><br><span class="line">assert name_of_email(&apos;&lt;Tom Paris&gt; tom@voyager.org&apos;) == &apos;Tom Paris&apos;</span><br><span class="line">assert name_of_email(&apos;tom@voyager.org&apos;) == &apos;tom&apos;</span><br><span class="line">print(&apos;ok&apos;)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/eleventh/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1757,158 +1927,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/second/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="贾燎原">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="燎原的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/second/" itemprop="url">小圆第二天的学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T15:04:48+08:00">
-                2018-11-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="python之第二天学习笔记"><a href="#python之第二天学习笔记" class="headerlink" title="python之第二天学习笔记"></a>python之第二天学习笔记</h1><h2 id="list列表与tuple元组"><a href="#list列表与tuple元组" class="headerlink" title="list列表与tuple元组"></a>list列表与tuple元组</h2><h3 id="list列表"><a href="#list列表" class="headerlink" title="list列表"></a>list列表</h3><p>list是一种有序的集合,可以随时添加和删除其中的元素,用以下示例来说明list用法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates = [&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</span><br><span class="line">&gt;&gt;&gt; classmates</span><br><span class="line">[&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</span><br><span class="line">&gt;&gt;&gt; len(classmates)</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; classmates[0]</span><br><span class="line">&apos;Michael&apos;</span><br><span class="line">&gt;&gt;&gt; classmates[-1]</span><br><span class="line">&apos;Tracy&apos;</span><br></pre></td></tr></table></figure></p>
-<p>list类似于c中的数组,但是使用起来比数组要方便,list列表是用[]来表示,至于为什么要强调这个因为下面还有个tuple使用()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates.append(&apos;Adam&apos;)</span><br><span class="line">&gt;&gt;&gt; classmates</span><br><span class="line">[&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;, &apos;Adam&apos;]</span><br><span class="line">&gt;&gt;&gt; classmates.insert(1, &apos;Jack&apos;)</span><br><span class="line">&gt;&gt;&gt; classmates</span><br><span class="line">[&apos;Michael&apos;, &apos;Jack&apos;, &apos;Bob&apos;, &apos;Tracy&apos;, &apos;Adam&apos;]</span><br><span class="line">&gt;&gt;&gt; classmates.pop()</span><br><span class="line">&apos;Adam&apos;</span><br><span class="line">&gt;&gt;&gt; classmates</span><br><span class="line">[&apos;Michael&apos;, &apos;Jack&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</span><br><span class="line">&gt;&gt;&gt; classmates.pop(1)</span><br><span class="line">&apos;Jack&apos;</span><br></pre></td></tr></table></figure></p>
-<p>添加一个元素,删除一个元素可以指定位置,注意insert必须指定插入位置,而append默认添加到最后一个.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates</span><br><span class="line">[&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</span><br><span class="line">&gt;&gt;&gt; classmates[1] = &apos;Sarah&apos;</span><br><span class="line">&gt;&gt;&gt; classmates</span><br><span class="line">[&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;]</span><br><span class="line">&gt;&gt;&gt; L = [&apos;Apple&apos;, 123, True]</span><br></pre></td></tr></table></figure></p>
-<p>如果要替换list中的某个元素可以直接赋值,list内部的元素可以是不同的数据类型.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = [&apos;python&apos;, &apos;java&apos;, [&apos;asp&apos;, &apos;php&apos;], &apos;scheme&apos;]</span><br><span class="line">&gt;&gt;&gt; len(s)</span><br><span class="line">4</span><br><span class="line">&gt;&gt;&gt; p = [&apos;asp&apos;, &apos;php&apos;]</span><br><span class="line">&gt;&gt;&gt; s = [&apos;python&apos;, &apos;java&apos;, p, &apos;scheme&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>list可以嵌套list,但是嵌套进去的list只能算作1个长度,要访问嵌套list中的某一元素可以将整个list视为一个二维数组如:要访问’php’可以使用s[2][1]来访问</p>
-<h3 id="tuple元组"><a href="#tuple元组" class="headerlink" title="tuple元组"></a>tuple元组</h3><p>其实tuple元组和list列表非常类似,list类表的内容时可变的,而tuple一旦初始化就不能修改,tuple使用()来表示,示例如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t = (1, 2)</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">(1, 2)</span><br><span class="line">&gt;&gt;&gt; t = (1)</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; t = (1,)</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">(1,)</span><br></pre></td></tr></table></figure></p>
-<p>注意如果元组只有一个元素,要在后面加上’,’,因为()也可以表示小括号,为了消除歧义,后面加上逗号.<br>下面让我们看一个有意思的例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t = (&apos;a&apos;, &apos;b&apos;, [&apos;A&apos;, &apos;B&apos;])</span><br><span class="line">&gt;&gt;&gt; t[2][0] = &apos;X&apos;</span><br><span class="line">&gt;&gt;&gt; t[2][1] = &apos;Y&apos;</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">(&apos;a&apos;, &apos;b&apos;, [&apos;X&apos;, &apos;Y&apos;])</span><br></pre></td></tr></table></figure></p>
-<p>之前说过tuple元组的内容一旦初始化就不能更改,但是为什么这里能更改呢?原因很简单,tuple不能更改它的指向,t[0]仍然指向’a’,t[1]仍然指向’b’,t[2]仍然指向list,但是list所指向的内容可以更改,因此,这个tuple看似也更改了.</p>
-<h3 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h3><p>计算机之所以能做很多自动化的任务，因为它可以自己做条件判断,这时候就需要用到条件语句.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">age = 3</span><br><span class="line">if age &gt;= 18:</span><br><span class="line">    print(&apos;adult&apos;)</span><br><span class="line">elif age &gt;= 6:</span><br><span class="line">    print(&apos;teenager&apos;)</span><br><span class="line">else:</span><br><span class="line">    print(&apos;kid&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>其实python的判断和c差不多,要注意好<font color="#dd0000">缩进</font><br>缩进,以及不要忘记写<font color="#dd0000">冒号</font><br>.<br>if 判断条件可以简写,比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if x:</span><br><span class="line">    print(&apos;True&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>只要x是非零数值,非空字符串,非空list就判断为True</p>
-<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><p>python的for循环和c语言类似:for…in循环依次把list或tuple中的每个元素迭代出来:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">names = [&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</span><br><span class="line">for name in names:</span><br><span class="line">    print(name)</span><br><span class="line">---------------------</span><br><span class="line">Michael</span><br><span class="line">Bob</span><br><span class="line">Tracy</span><br></pre></td></tr></table></figure></p>
-<p>所以for x in …循环就是把每个元素带入变量x,然后执行缩进块的语句.在通过下面这个例子进行思考:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sum = 0</span><br><span class="line">for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:</span><br><span class="line">    sum = sum + x</span><br><span class="line">print(sum)</span><br></pre></td></tr></table></figure></p>
-<p>如果要求不是1-10相加,而是1-1000相加我们难道要一个一个写吗?当然不是,python提供了range()函数,可以生产一个整数数列,再通过list()函数转化为list.如range(5)生成从0开始到小于5的整数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list(range(5))</span><br><span class="line">[0, 1, 2, 3, 4]</span><br></pre></td></tr></table></figure></p>
-<p>再加一个小练习:请利用循环依次对list中的每个名字打印出’Hello, xxx!’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L = [&apos;Bart&apos;, &apos;Lisa&apos;, &apos;Adam&apos;]</span><br><span class="line">for i in L:</span><br><span class="line">    print(&apos;Hello,&apos;,i+&apos;!&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>这里有必要特别思考一下加上’!’如何消除空格</p>
-<h4 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h4><p>python中的while循环和c语言类似,但要主意好缩进,示例如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sum = 0</span><br><span class="line">n = 99</span><br><span class="line">while n &gt; 0:</span><br><span class="line">    sum = sum + n</span><br><span class="line">    n = n - 2</span><br><span class="line">print(sum)</span><br><span class="line">---------------</span><br><span class="line">2500</span><br></pre></td></tr></table></figure></p>
-<h3 id="break"><a href="#break" class="headerlink" title="break"></a>break</h3><p>在循环中break可以提前退出循环,和c语言一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">n = 1</span><br><span class="line">while n &lt;= 100:</span><br><span class="line">    if n &gt; 10: # 当n = 11时，条件满足，执行break语句</span><br><span class="line">        break # break语句会结束当前循环</span><br><span class="line">    print(n)</span><br><span class="line">    n = n + 1</span><br><span class="line">print(&apos;END&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>执行上面的代码可以看到，打印出1~10后，紧接着打印END，程序结束。</p>
-<h3 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h3><p>在循环中continue可以跳过当前这次循环,和c语言一样,示例如下,输出 1 3 5 7 9<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n = 0</span><br><span class="line">while n &lt; 10:</span><br><span class="line">    n = n + 1</span><br><span class="line">    if n % 2 == 0: # 如果n是偶数，执行continue语句</span><br><span class="line">        continue # continue语句会直接继续下一轮循环，后续的print()语句不会执行</span><br><span class="line">    print(n)</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用dict和set"><a href="#使用dict和set" class="headerlink" title="使用dict和set"></a>使用dict和set</h2><h3 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h3><p>python内置了字典,在其他语言中称为map,使用键-值存储,查找速度快?<br>举个栗子:假设要根据同学的姓名查找成绩,如果用list实现需要两个list,先在名字list中找到姓名,再从成绩list中取出相应的成绩.list越长,耗时越长.如果用dict实现,只需要根据名字查成绩就行,因为它的原理和查字典一样,先在字典的索引表里查到这个字对应的页码,然后翻到这页找到这个字,这种方法速度快,不会随着字典大小的增加而变慢.而list则是从字典的第一页,一页一页的查找.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = &#123;&apos;Michael&apos;: 95, &apos;Bob&apos;: 75, &apos;Tracy&apos;: 85&#125;</span><br><span class="line">&gt;&gt;&gt; d[&apos;Michael&apos;]</span><br><span class="line">95</span><br></pre></td></tr></table></figure></p>
-<p>dict是以空间换取时间,把数据放入dict除了初始化还可以通过key值放入:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d[&apos;Adam&apos;] = 67</span><br><span class="line">&gt;&gt;&gt; d[&apos;Adam&apos;]</span><br><span class="line">67</span><br><span class="line">&gt;&gt;&gt; d[&apos;Jack&apos;] = 90</span><br><span class="line">&gt;&gt;&gt; d[&apos;Jack&apos;]</span><br><span class="line">90</span><br><span class="line">&gt;&gt;&gt; d[&apos;Jack&apos;] = 88</span><br><span class="line">&gt;&gt;&gt; d[&apos;Jack&apos;]</span><br><span class="line">88</span><br></pre></td></tr></table></figure></p>
-<p>由于一个key对应一个value,所以后面的赋值会把前面的冲掉<br>如果key不存在dict就会报错,可以通过in和get的方法判断key是否存在:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;Thomas&apos; in d</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; d.get(&apos;Thomas&apos;)//返回None,交互环境不显示</span><br><span class="line">&gt;&gt;&gt; d.get(&apos;Thomas&apos;, -1)//人为设置不存在时返回-1</span><br><span class="line">-1</span><br></pre></td></tr></table></figure></p>
-<p>要删除一个key可以用pop(key),连同value也一并删除:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d.pop(&apos;Bob&apos;)</span><br><span class="line">75</span><br><span class="line">&gt;&gt;&gt; d</span><br><span class="line">&#123;&apos;Michael&apos;: 95, &apos;Tracy&apos;: 85&#125;</span><br></pre></td></tr></table></figure></p>
-<p>dict可以用在需要高速查找的很多地方，在Python代码中几乎无处不在，正确使用dict非常重要，需要牢记的第一条就是dict的key必须是不可变对象。</p>
-<p>这是因为dict根据key来计算value的存储位置，如果每次计算相同的key得出的结果不同，那dict内部就完全混乱了。这个通过key计算位置的算法称为哈希算法（Hash）。</p>
-<p>要保证hash的正确性，作为key的对象就不能变。在Python中，字符串、整数等都是不可变的，因此，可以放心地作为key。而list是可变的，就不能作为key</p>
-<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set和dict类似,只不过不存储value,key值也不能重复,也不是有序的,重复元素在set中自动被过滤,因此set可以看成数学意义上的无序和无重复元素的集合,因此也可以做交集,并集等操作:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = set([1, 2, 3])</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3&#125;</span><br><span class="line">&gt;&gt;&gt; s = set([1, 1, 2, 2, 3, 3])</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3&#125;</span><br><span class="line">&gt;&gt;&gt; s1 = set([1, 2, 3])</span><br><span class="line">&gt;&gt;&gt; s2 = set([2, 3, 4])</span><br><span class="line">&gt;&gt;&gt; s1 &amp; s2</span><br><span class="line">&#123;2, 3&#125;</span><br><span class="line">&gt;&gt;&gt; s1 | s2</span><br><span class="line">&#123;1, 2, 3, 4&#125;</span><br></pre></td></tr></table></figure></p>
-<p>set可以通过add(key)方法添加元素到set中,通过remove(key)方法删除元素:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s.add(4)</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3, 4&#125;</span><br><span class="line">&gt;&gt;&gt; s.add(4)//dict加入的话直接写</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3, 4&#125;</span><br><span class="line">&gt;&gt;&gt; s.remove(4)//dict删除的话使用pop()</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3&#125;</span><br></pre></td></tr></table></figure></p>
-<p>同样set同样不能放入不可变对象,否则会报错.</p>
-<h3 id="再议不可变对象"><a href="#再议不可变对象" class="headerlink" title="再议不可变对象"></a>再议不可变对象</h3><p>通过上面的讲解list是可变对象,而整数和字符串是不可变对象,对于可变对象list的内部内容时会变化的比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = [&apos;c&apos;, &apos;b&apos;, &apos;a&apos;]</span><br><span class="line">&gt;&gt;&gt; a.sort()</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>而对于不可变对象,字符串有课replace()方法可以’改变’:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = &apos;abc&apos;</span><br><span class="line">&gt;&gt;&gt; b = a.replace(&apos;a&apos;, &apos;A&apos;)</span><br><span class="line">&gt;&gt;&gt; b</span><br><span class="line">&apos;Abc&apos;</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">&apos;abc&apos;</span><br></pre></td></tr></table></figure></p>
-<p>当我们调用a.replace(‘a’,’A’)时,实际上replace是作用在对象’abc’上的,但是这个方法却没有改变字符串’abc’的内容,而是replace方法创建一个新的字符串’Abc’并返回,如果我们用变量b指向这个字符串,就容易理解了</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1959,7 +1977,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
